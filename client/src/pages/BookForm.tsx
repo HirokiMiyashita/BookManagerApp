@@ -20,10 +20,8 @@ export default function BookForm() {
   const { id } = useParams();
   const [_, navigate] = useLocation();
   const { toast } = useToast();
-  
-  const { data: book } = useSWR<Book>(
-    id ? `/api/books/${id}` : null
-  );
+
+  const { data: book } = useSWR<Book>(id ? `/api/books/${id}` : null);
 
   const form = useForm<InsertBook>({
     resolver: zodResolver(insertBookSchema),
@@ -41,7 +39,7 @@ export default function BookForm() {
     try {
       const url = id ? `/api/books/${id}` : "/api/books";
       const method = id ? "PUT" : "POST";
-      
+
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
@@ -79,7 +77,7 @@ export default function BookForm() {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
+                <FormLabel>タイトル</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -93,7 +91,7 @@ export default function BookForm() {
             name="author"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Author</FormLabel>
+                <FormLabel>著者</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -121,7 +119,7 @@ export default function BookForm() {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>説明</FormLabel>
                 <FormControl>
                   <Textarea {...field} />
                 </FormControl>
@@ -135,7 +133,7 @@ export default function BookForm() {
             name="genre"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Genre</FormLabel>
+                <FormLabel>カテゴリー</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -149,7 +147,7 @@ export default function BookForm() {
             name="publishedYear"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Published Year</FormLabel>
+                <FormLabel>作成日</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -164,7 +162,7 @@ export default function BookForm() {
 
           <div className="flex gap-4">
             <Button type="submit">
-              {id ? "Update Book" : "Create Book"}
+              {id ? "本を更新する" : "本を作成する"}
             </Button>
             <Button
               type="button"
